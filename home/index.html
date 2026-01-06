@@ -1,22 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My first Vue page</title>
-  <link rel="stylesheet" href="css/style.css?version=0.1">">
+  <meta charset="UTF-8">
+  <title>Personal Profile | ANTHONY DUENAS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Vue Example</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#hobbies">Hobbies</a>
+    <a href="#goals">Goals</a>
+    <a href="#gallery">Gallery</a>
+    <a href="resources.html">Resources</a>
+  </nav>
 
-<p>The message is taken from 'data' inside the Vue instance by writing {{ message }} inside the div with id="app".</p>
+  <header>
+    <div class="hero-sub">WELCOME TO MY PERSONAL WEBSITE</div>
+    <div class="hero-name-solid">ANTHONY</div>
+    <div class="hero-name-outline">DUENAS</div>
+    <div class="hero-action">
+      <a href="#about" class="explore-btn">EXPLORE PROFILE</a>
+    </div>
+  </header>
 
-<div id="app">
-  {{ HAPPY NEWYEAR EVERYONE }}
-</div>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I am a second-year Information Technology student at Asia Pacific College. I am interested in web development and continuously improving my technical skills.</p>
+  </section>
 
-<script src="js/vue.js"></script>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <section id="education">
+    <h2>Education / Achievements</h2>
+    <p>Asia Pacific College<br>Bachelor of Science in Information Technology<br>Second Year Student</p>
+  </section>
+
+  <section id="experience">
+    <h2>IT Experience</h2>
+    <p>I have basic knowledge of HTML and CSS and I am still learning more about JavaScript and modern web technologies.</p>
+  </section>
+
+  <section id="hobbies">
+    <h2>Hobbies & Interests</h2>
+    <ul>
+      <li>Playing basketball</li>
+      <li>Listening to music</li>
+    </ul>
+  </section>
+
+  <section id="goals">
+    <h2>Goals in Life / Dream</h2>
+    <p>My goal is to finish my studies and reach my dreams so I can repay my parents for their sacrifices.</p>
+    <button id="motivateBtn">Click for Motivation</button>
+  </section>
+
+  <section id="gallery">
+    <h2>Picture Gallery</h2>
+    <img src="https://as-prod.asyncgw.teams.microsoft.com/v1/9f8d3607-32c4-4e7f-a4db-9861ebf737cc/objects/0-ea-d10-e0083b1ba367f66b9d8974586fabe49f/views/imgpsh_fullsize" alt="Profile Picture">
+     <img src="https://as-prod.asyncgw.teams.microsoft.com/v1/9f8d3607-32c4-4e7f-a4db-9861ebf737cc/objects/0-ea-d11-54f87a105944923af96c50a588fd96ac/views/imgpsh_fullsize">
+  </section>
 
 
+  <section id="guestbook">
+  <h2>Visitor Guestbook</h2>
+  <p>Leave a comment and mark your favorites!</p>
+
+  <form v-on:submit.prevent="addEntry">
+    <p>
+      Your Name: <br>
+      <input type="text" required placeholder="Name.." v-model="visitorName">
+    </p>
+    <p>
+      Your Feedback/Comment: <br>
+      <textarea required placeholder="Write something.." v-model="visitorComment"></textarea>
+    </p>
+    <p>
+      Mark as Public?
+      <label>
+        <input type="checkbox" v-model="isPublic">
+        {{ isPublic }}
+      </label>
+    </p>
+    <button type="submit">Post Comment</button>
+  </form>
+
+  <hr>
+
+  <div>
+    <p><strong>Recent Comments (Click to "Like"):</strong></p>
+    <ul id="ulToFind">
+      <li 
+        v-for="entry in guestbookEntries" 
+        v-bind:class="{ impClass: entry.public }"
+        v-on:click="entry.liked=!entry.liked"
+        v-show="!entry.liked">
+          <strong>{{ entry.name }}</strong>: "{{ entry.comment }}"
+      </li>
+    </ul>
+
+    <p><strong>Liked Comments:</strong></p>
+    <ul id="ulFound">
+      <li 
+        v-for="entry in guestbookEntries" 
+        v-bind:class="{ impClass: entry.public }"
+        v-on:click="entry.liked=!entry.liked"
+        v-show="entry.liked">
+          ❤️ <strong>{{ entry.name }}</strong>: "{{ entry.comment }}"
+      </li>
+    </ul>
+  </div>
+</section>
+
+  <footer>
+    <p>© 2026 ANTHONY DUENAS | WEBPROG IT-241</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
