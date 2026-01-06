@@ -2,10 +2,10 @@
   const app = Vue.createApp({
    data() {
     return {
-     message: "HAPPY NEWYEAR Classmates!"
+     message: "HAPPY NEWYEAR CLASSMATES!"
     }
    }
   })
-  
+
   app.mount('#app')
 
