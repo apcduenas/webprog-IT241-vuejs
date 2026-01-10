@@ -1,3 +1,22 @@
+#guestbook .public-check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+#guestbook .public-check-row label {
+  margin: 0;
+  font-weight: bold;
+}
+#guestbook .public-check-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--fire-orange);
+}
+#guestbook .public-check-value {
+  color: var(--fire-yellow);
+  font-size: 0.95em;
+}
 :root {
   --fire-red: #e62117;
   --fire-orange: #ff6a00;
@@ -10,7 +29,7 @@
 body {
   font-family: 'Arial Black', Gadget, sans-serif;
   margin: 0;
-  background-color: var(--charcoal);
+  background: url('../images/GhostRider.jpg') center center/cover no-repeat fixed;
   color: var(--text-white);
   scroll-behavior: smooth;
 }
@@ -43,15 +62,36 @@ nav a:hover {
 }
 
 /* HERO HEADER (Based on classmate image) */
+
 header {
-  height: 90vh;
+  position: relative;
+  height: 100vh;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: black;
   text-align: center;
   border-bottom: 4px solid var(--fire-red);
+  background: none;
+  z-index: 1;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6); /* dark overlay */
+  z-index: 2;
+}
+
+header > * {
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 768px) {
+  header { height: 60vh; min-height: 300px; }
 }
 
 .hero-sub {
@@ -194,4 +234,59 @@ footer {
   opacity: 0.8;
   background-color: #1a1a1a;
   border-left-color: #555;
+}
+
+/* GALLERY */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.thumb img {
+  width: 100%;
+  max-width: 300px;
+  max-height: 420px;
+  aspect-ratio: 3/4;
+  border: 4px solid var(--fire-red);
+  cursor: pointer;
+  object-fit: cover;
+  background: #111;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+}
+.modal img.modal-img {
+  max-width: 70%;
+  max-height: 70%;
+  border: 6px solid var(--fire-yellow);
+}
+.modal .nav {
+  background: transparent;
+  border: none;
+  color: var(--fire-yellow);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px;
+}
+.modal .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--fire-red);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .thumb img { height: 90px; }
+  .modal img.modal-img { max-width: 95%; max-height: 70%; }
 }
