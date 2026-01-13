@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <h2>{{ name }}</h2>
-    <p>{{ message }}</p>
-  </div>
+  <h1>Fruits</h1>
+  <food-item />
+  <food-item />
+  <food-item />
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      name: 'Apples',
-      message: 'I like apples'
-    }
-  }
-};
-</script>
+<script></script>
 
-<style></style>
+<style>
+  #app > div {
+    border: dashed black 1px;
+    display: inline-block;
+    width: 120px;
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgreen;
+  }
+  #app > div:hover {
+    cursor: pointer;
+  }
+</style>            
