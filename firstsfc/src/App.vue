@@ -1,10 +1,28 @@
 <template>
-  <h1>Food</h1>
-  <personal-profile/>
-  <food-item/>
-  <food-item2/>
+  <div class="Melon">>
+
+    <h2>{{ name }}</h2>
+    <p>{{ message }}</p>
+  </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      name: 'Apple',
+      message: 'I want Apple'
+    }
+  }
+};
+</script>
 
-<style></style>
+<style>
+  .apple {
+    border: dashed black 1px;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: red;
+  }
+</style>
