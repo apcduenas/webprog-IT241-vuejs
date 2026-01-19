@@ -1,12 +1,21 @@
 <template>
-
-  <h1>Food</h1>
-  <food-item/>
-  <food-item2/>
- 
+  <PersonalProfile />
+  <FoodItem />
+  <FoodItem2 />
 </template>
 
-<script></script>
+<script>
+import PersonalProfile from "./components/PersonalProfile.vue"
+import FoodItem from "./components/FoodItem.vue"
+import FoodItem2 from "./components/FoodItem2.vue"
+
+export default {
+  components: {
+    PersonalProfile,
+    FoodItem,
+    FoodItem2
+  }
+}
+</script>
 
 <style></style>
-
