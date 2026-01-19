@@ -1,14 +1,13 @@
 import { createApp } from 'vue'
-
 import App from './App.vue'
-import PersonalProfile from './components/Personalprofile.vue'
-import FoodItem from './components/FoodItem.vue'
-import FoodItem2 from './components/FoodItem2.vue'
+import FoodItem from './Components/FoodItem.vue'
+import FoodItem2 from './Components/FoodItem2.vue'
+import PersonalProfile from './Components/PersonalProfile.vue' // 1. Import it
 
 const app = createApp(App)
 
-app.component('personal-profile', Personalprofile)
 app.component('food-item', FoodItem)
 app.component('food-item2', FoodItem2)
+app.component('personal-profile', PersonalProfile) // 2. Register it
 
 app.mount('#app')
