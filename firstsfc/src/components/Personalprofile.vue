@@ -124,11 +124,100 @@
 
   <footer>
     <p>© 2026 ANTHONY DUENAS | WEBPROG IT-241</p>
-  </footer>
-  </div>
 
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="js/vue.js"></script>
-  <style src="./css/personalprofile.css"></style>
-</body>
-</html>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "PersonalProfile"
+}
+</script>
+
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  background: black;
+  padding: 12px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+nav li {
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  min-height: 90vh;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.hero img {
+  width: 260px;        
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-content {
+  max-width: 400px;
+}
+
+.hero-content h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  color: #555;
+}
+
+.section {
+  padding: 60px 20px;
+}
+
+.dark {
+  background: #0b0b0b;
+  color: white;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+}
+
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+</style>
