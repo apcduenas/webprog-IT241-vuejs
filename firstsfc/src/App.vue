@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import PersonalProfile from "./components/Personalprofile.vue"
-import FoodItem from "./components/FoodItem.vue"
-import FoodItem2 from "./components/FoodItem2.vue"
+import PersonalProfile from './components/Personalprofile.vue'
+import FoodItem from './components/FoodItem.vue'
+import FoodItem2 from './components/FoodItem2.vue'
 
 export default {
   components: {
