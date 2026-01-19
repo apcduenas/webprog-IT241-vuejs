@@ -1,5 +1,5 @@
 <template>
-  <div class="ghost-rider-body">
+  <div class="ghost-rider-theme">
     <nav>
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -18,23 +18,23 @@
       </div>
     </header>
 
-    <main class="content-container">
-      <section id="about" class="fire-box">
+    <main>
+      <section id="about">
         <h2>About Me</h2>
         <p>I am a second-year Information Technology student at Asia Pacific College. I am interested in web development and continuously improving my technical skills.</p>
       </section>
 
-      <section id="education" class="fire-box">
+      <section id="education">
         <h2>Education / Achievements</h2>
         <p>Asia Pacific College<br>Bachelor of Science in Information Technology<br>Second Year Student</p>
       </section>
 
-      <section id="experience" class="fire-box">
+      <section id="experience">
         <h2>IT Experience</h2>
         <p>I have basic knowledge of HTML and CSS and I am still learning more about JavaScript and modern web technologies.</p>
       </section>
 
-      <section id="hobbies" class="fire-box">
+      <section id="hobbies">
         <h2>Hobbies & Interests</h2>
         <ul>
           <li>Playing basketball</li>
@@ -42,13 +42,13 @@
         </ul>
       </section>
 
-      <section id="goals" class="fire-box">
+      <section id="goals">
         <h2>Goals in Life / Dream</h2>
         <p>My goal is to finish my studies and reach my dreams so I can repay my parents for their sacrifices.</p>
-        <button id="motivateBtn" @click="motivate">Click for Motivation</button>
+        <button @click="motivate">Click for Motivation</button>
       </section>
 
-      <section id="gallery" class="fire-box">
+      <section id="gallery">
         <h2>Picture Gallery</h2>
         <div class="gallery-grid">
           <div class="thumb" v-for="(img, idx) in images" :key="idx">
@@ -57,49 +57,45 @@
         </div>
 
         <div class="modal" v-if="selected !== null" @click.self="close">
-          <button class="nav-btn prev" @click.stop="prev">◀</button>
+          <button class="nav prev" @click.stop="prev">◀</button>
           <img :src="images[selected].src" :alt="images[selected].alt" class="modal-img">
-          <button class="nav-btn next" @click.stop="next">▶</button>
-          <button class="close-x" @click="close">✕</button>
+          <button class="nav next" @click.stop="next">▶</button>
+          <button class="close" @click="close">✕</button>
         </div>
       </section>
 
-      <section id="guestbook" class="fire-box">
+      <section id="guestbook">
         <h2>Visitor Guestbook</h2>
-        <p>Leave a comment and mark your favorites!</p>
-
         <form @submit.prevent="addEntry">
-          <p>Your Name:<br>
-            <input type="text" required placeholder="Name.." v-model="visitorName">
-          </p>
-          <p>Your Feedback:<br>
-            <textarea required placeholder="Write something.." v-model="visitorComment"></textarea>
-          </p>
+          <p>Your Name: <input type="text" required v-model="visitorName"></p>
+          <p>Your Feedback: <textarea required v-model="visitorComment"></textarea></p>
           <div class="public-check-row">
             <label>Mark as Public?</label>
             <input type="checkbox" v-model="isPublic">
             <span class="public-check-value">{{ isPublic }}</span>
           </div>
-          <button type="submit" class="post-btn">Post Comment</button>
+          <button type="submit">Post Comment</button>
         </form>
 
-        <div class="comments-area">
+        <div class="comment-lists">
           <p><strong>Recent Comments:</strong></p>
           <ul>
             <li v-for="entry in guestbookEntries" 
+                :key="entry.name"
                 :class="{ impClass: entry.public }"
                 v-show="!entry.liked"
-                @click="entry.liked = !entry.liked">
+                @click="entry.liked = true">
               <strong>{{ entry.name }}</strong>: "{{ entry.comment }}"
             </li>
           </ul>
 
           <p><strong>Liked Comments:</strong></p>
-          <ul>
+          <ul id="ulFound">
             <li v-for="entry in guestbookEntries" 
+                :key="'liked-'+entry.name"
                 v-show="entry.liked"
-                @click="entry.liked = !entry.liked">
-              🔥 <strong>{{ entry.name }}</strong>: "{{ entry.comment }}"
+                @click="entry.liked = false">
+              ❤️ <strong>{{ entry.name }}</strong>: "{{ entry.comment }}"
             </li>
           </ul>
         </div>
@@ -122,14 +118,15 @@ export default {
       visitorComment: '',
       isPublic: false,
       images: [
-        { src: 'https://via.placeholder.com/150/ff4d00', alt: 'Profile 1' },
-        { src: 'https://via.placeholder.com/150/ff0000', alt: 'Profile 2' }
+        { src: 'https://via.placeholder.com/300x420/e62117/ffffff?text=Gallery+1', alt: 'Image 1' },
+        { src: 'https://via.placeholder.com/300x420/ff6a00/ffffff?text=Gallery+2', alt: 'Image 2' },
+        { src: 'https://via.placeholder.com/300x420/ffcc00/000000?text=Gallery+3', alt: 'Image 3' }
       ],
       guestbookEntries: []
     }
   },
   methods: {
-    motivate() { alert("Look into my eyes! Your future is yours to forge."); },
+    motivate() { alert("Keep moving forward, Anthony! The fire never dies."); },
     open(idx) { this.selected = idx; },
     close() { this.selected = null; },
     next() { this.selected = (this.selected + 1) % this.images.length; },
@@ -148,87 +145,85 @@ export default {
 </script>
 
 <style scoped>
-/* GHOST RIDER THEME CSS */
-.ghost-rider-body {
-  background-color: #0a0a0a;
-  color: #eee;
+:root {
+  --fire-red: #e62117;
+  --fire-orange: #ff6a00;
+  --fire-yellow: #ffcc00;
+  --charcoal: #0a0a0a;
+  --smoke: #1a1a1a;
+  --text-white: #ffffff;
+}
+
+.ghost-rider-theme {
+  background-color: var(--charcoal);
+  color: var(--text-white);
   font-family: 'Arial Black', Gadget, sans-serif;
   min-height: 100vh;
 }
 
-nav {
-  background: #000;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 2px solid #ff4d00;
-}
-
-nav a {
-  color: #ff4d00;
-  text-decoration: none;
-  margin: 0 15px;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-}
-
+/* HERO SECTION */
 header {
-  padding: 100px 20px;
-  text-align: center;
-  background: radial-gradient(circle, #220000 0%, #0a0a0a 100%);
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x1080/000000/ff4500?text=Ghost+Rider+Background');
+  background-size: cover;
+  border-bottom: 4px solid var(--fire-red);
 }
 
-.hero-sub { color: #ff4d00; letter-spacing: 3px; font-size: 0.7rem; }
-.hero-name-solid { font-size: 5rem; font-weight: 900; line-height: 1; }
+.hero-sub { color: var(--fire-orange); letter-spacing: 5px; margin-bottom: 20px; }
+.hero-name-solid { font-size: 5rem; letter-spacing: 10px; line-height: 1; }
 .hero-name-outline { 
   font-size: 5rem; 
   color: transparent; 
-  -webkit-text-stroke: 1px #ff4d00; 
-  text-shadow: 0 0 15px #ff4d00;
+  -webkit-text-stroke: 2px var(--fire-orange); 
+  margin-bottom: 40px; 
 }
 
-.fire-box {
-  background: #111;
-  border: 1px solid #330000;
-  border-left: 4px solid #ff4d00;
-  margin: 20px auto;
-  padding: 30px;
-  max-width: 800px;
+/* NAVIGATION */
+nav {
+  background: rgba(0, 0, 0, 0.95);
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid var(--fire-orange);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav a { color: var(--fire-orange); text-decoration: none; margin: 0 15px; font-size: 0.8rem; }
+
+/* SECTIONS */
+section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background: var(--smoke);
+  border-left: 4px solid var(--fire-red);
 }
 
-h2 { color: #ff4d00; text-transform: uppercase; border-bottom: 1px solid #330000; padding-bottom: 10px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+.thumb img { width: 100%; border: 3px solid var(--fire-red); cursor: pointer; filter: grayscale(100%); transition: 0.3s; }
+.thumb img:hover { filter: grayscale(0%); transform: scale(1.05); }
 
-input, textarea {
-  background: #222;
-  border: 1px solid #ff4d00;
-  color: #fff;
-  padding: 10px;
-  width: 100%;
-  margin-top: 5px;
-}
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 200; }
+.modal-img { max-width: 80%; border: 5px solid var(--fire-yellow); }
+
+.public-check-row { display: flex; align-items: center; gap: 10px; margin: 15px 0; }
+.impClass { border-left: 4px solid var(--fire-yellow) !important; background: #2a2a2a !important; }
 
 button {
-  background: #ff4d00;
-  color: #000;
+  background: var(--fire-red);
+  color: white;
   border: none;
-  padding: 10px 20px;
-  font-weight: bold;
+  padding: 15px 30px;
   cursor: pointer;
   text-transform: uppercase;
-  margin-top: 10px;
+  font-weight: bold;
 }
+button:hover { background: var(--fire-yellow); color: black; }
 
-button:hover { background: #fff; box-shadow: 0 0 20px #ff4d00; }
-
-.impClass { color: #ff4d00; font-weight: bold; }
-
-/* Modal / Gallery */
-.gallery-grid { display: flex; gap: 15px; }
-.thumb img { width: 100px; cursor: pointer; border: 1px solid #444; }
-.modal {
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center;
-}
-.modal-img { max-width: 80%; border: 2px solid #ff4d00; }
-
-footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #222; }
+footer { padding: 50px; text-align: center; color: #666; font-size: 0.8rem; }
 </style>
